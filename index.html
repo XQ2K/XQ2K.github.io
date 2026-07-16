@@ -1,0 +1,1511 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Yuqing Luo - multimodal computer vision, vision-language learning, visual content evaluation, and robust visual perception." />
+  <meta name="theme-color" content="#07101e" />
+  <meta property="og:title" content="Yuqing Luo | Multimodal Computer Vision Researcher" />
+  <meta property="og:description" content="Research in vision-language learning, image complexity and quality assessment, AIGC analysis, and robust visual perception." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Yuqing Luo | Multimodal Computer Vision</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Yuqing Luo",
+    "alternateName": "罗予清",
+    "email": "mailto:xqtheone@gmail.com",
+    "alumniOf": [
+      {"@type":"CollegeOrUniversity","name":"Cardiff University"},
+      {"@type":"CollegeOrUniversity","name":"University of Greenwich"}
+    ],
+    "knowsAbout": [
+      "Multimodal Computer Vision",
+      "Vision-Language Learning",
+      "Image Complexity Assessment",
+      "Visual Quality Assessment",
+      "Robust Visual Perception"
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07101e;
+      --bg-soft: #0b1728;
+      --panel: rgba(13, 27, 46, .78);
+      --panel-solid: #0d1b2e;
+      --panel-alt: #10213a;
+      --text: #edf5ff;
+      --muted: #9fb1c9;
+      --line: rgba(163, 187, 217, .16);
+      --line-strong: rgba(163, 187, 217, .28);
+      --accent: #67e8f9;
+      --accent-2: #a78bfa;
+      --accent-3: #34d399;
+      --accent-soft: rgba(103, 232, 249, .12);
+      --danger-soft: rgba(251, 113, 133, .11);
+      --shadow: 0 24px 70px rgba(0, 0, 0, .28);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1180px;
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #e9eef5;
+      --bg-soft: #e2e9f2;
+      --panel: rgba(255, 255, 255, .94);
+      --panel-solid: #ffffff;
+      --panel-alt: #edf2f7;
+      --text: #14253c;
+      --muted: #52647d;
+      --line: rgba(38, 66, 100, .22);
+      --line-strong: rgba(38, 66, 100, .36);
+      --accent: #047d98;
+      --accent-2: #7256c9;
+      --accent-3: #087f5b;
+      --accent-soft: rgba(4, 125, 152, .09);
+      --danger-soft: rgba(190, 24, 93, .08);
+      --shadow: 0 18px 46px rgba(34, 57, 88, .13), 0 3px 10px rgba(34, 57, 88, .07);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(103, 232, 249, .10), transparent 28rem),
+        radial-gradient(circle at 90% 18%, rgba(167, 139, 250, .10), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.68;
+      transition: background-color .3s ease, color .3s ease;
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: rgba(103, 232, 249, .25); }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 1000;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--text);
+      color: var(--bg);
+      transition: top .2s ease;
+    }
+    .skip-link:focus { top: 16px; }
+
+    #network-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: .52;
+      pointer-events: none;
+    }
+
+    .shell { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .section { padding: 94px 0 24px; }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr);
+      align-items: end;
+      gap: 42px;
+      margin-bottom: 36px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 850px;
+      margin-bottom: 22px;
+      font-size: clamp(3rem, 7.2vw, 6.5rem);
+      line-height: .96;
+      letter-spacing: -.065em;
+    }
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(2rem, 4vw, 3.45rem);
+      line-height: 1.08;
+      letter-spacing: -.04em;
+    }
+    h3 { line-height: 1.25; letter-spacing: -.018em; }
+    .lead { max-width: 760px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.22rem); }
+    .muted { color: var(--muted); }
+    .accent-text {
+      color: var(--accent);
+      text-shadow: 0 0 34px rgba(103, 232, 249, .2);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid transparent;
+      background: rgba(7, 16, 30, .56);
+      backdrop-filter: blur(18px) saturate(1.2);
+      transition: border-color .25s ease, background .25s ease;
+    }
+    html[data-theme="light"] .site-header { background: rgba(247, 249, 253, .72); }
+    .site-header.scrolled { border-color: var(--line); }
+    .nav-wrap {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: linear-gradient(145deg, var(--accent-soft), transparent);
+      color: var(--accent);
+      font-size: .9rem;
+      letter-spacing: -.04em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 7px; }
+    .nav-links a {
+      padding: 8px 11px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .2s ease, background .2s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--accent-soft); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-button, .lang-button, .menu-button {
+      min-width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .2s ease, transform .2s ease, background .2s ease;
+    }
+    .icon-button:hover, .lang-button:hover, .menu-button:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .lang-button { padding-inline: 11px; font-size: .8rem; font-weight: 800; }
+    .menu-button { display: none; }
+
+    .hero {
+      min-height: calc(100svh - 74px);
+      display: grid;
+      align-items: center;
+      padding: 76px 0 50px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(340px, .82fr);
+      align-items: center;
+      gap: 62px;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 9px 14px;
+      border: 1px solid rgba(52, 211, 153, .28);
+      border-radius: 999px;
+      background: rgba(52, 211, 153, .08);
+      color: var(--accent-3);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 7px rgba(52, 211, 153, .11);
+      animation: pulse 2.4s infinite;
+    }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 12px rgba(52, 211, 153, 0); } }
+    .hero-copy { max-width: 760px; }
+    .hero-copy .lead { max-width: 680px; margin-bottom: 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 17px;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      background: var(--panel);
+      color: var(--text);
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .button.primary { border-color: transparent; background: var(--accent); color: #06202a; }
+    html[data-theme="light"] .button.primary { color: white; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--muted); font-size: .9rem; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+
+    .research-orbit {
+      position: relative;
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+    .orbit-card {
+      position: relative;
+      width: min(100%, 500px);
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(103, 232, 249, .08), transparent 42%),
+        repeating-radial-gradient(circle at center, transparent 0 72px, var(--line) 73px 74px, transparent 75px 118px);
+      box-shadow: inset 0 0 90px rgba(103, 232, 249, .04), var(--shadow);
+    }
+    .orbit-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 152px;
+      height: 152px;
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(103, 232, 249, .42);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(103, 232, 249, .2), rgba(13, 27, 46, .94) 65%);
+      box-shadow: 0 0 60px rgba(103, 232, 249, .14);
+      text-align: center;
+      font-weight: 850;
+      line-height: 1.2;
+      z-index: 3;
+    }
+    html[data-theme="light"] .orbit-core { background: radial-gradient(circle, rgba(4, 125, 152, .13), rgba(255, 255, 255, .97) 68%); }
+    .orbit-core small { display: block; margin-top: 7px; color: var(--muted); font-size: .72rem; font-weight: 600; }
+    .orbit-node {
+      position: absolute;
+      min-width: 102px;
+      padding: 10px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: var(--panel-solid);
+      color: var(--text);
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 750;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .18);
+      animation: float 5s ease-in-out infinite;
+    }
+    .orbit-node.orbit-complex { left: 3%; top: 12%; animation-delay: -.5s; }
+    .orbit-node.orbit-robust { left: 50%; top: 2%; transform: translateX(-50%); animation-delay: -1.1s; }
+    .orbit-node.orbit-vlm { right: 2%; top: 24%; animation-delay: -1.8s; }
+    .orbit-node.orbit-quality { right: 4%; bottom: 20%; animation-delay: -2.6s; }
+    .orbit-node.orbit-scene { left: 50%; bottom: 2%; transform: translateX(-50%); animation-delay: -3.4s; }
+    .orbit-node.orbit-aigc { left: 1%; bottom: 24%; animation-delay: -4.1s; }
+    @keyframes float { 0%,100% { margin-top: 0; } 50% { margin-top: -8px; } }
+    .orbit-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+    .orbit-svg line { stroke: var(--line-strong); stroke-width: 1.1; stroke-dasharray: 4 8; }
+    .orbit-svg circle { fill: var(--accent); opacity: .8; }
+    .orbit-dot { offset-path: path("M250 250 L80 110"); animation: travel 4.4s linear infinite; }
+    @keyframes travel { to { offset-distance: 100%; } }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .metric {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+    }
+    .metric-value { display: block; margin-bottom: 4px; color: var(--accent); font-size: 2rem; font-weight: 850; letter-spacing: -.05em; }
+    .metric-label { color: var(--muted); font-size: .86rem; }
+
+    .glass {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .about-grid { display: grid; grid-template-columns: 1.04fr .96fr; gap: 24px; }
+    .about-copy { padding: 34px; }
+    .about-copy p { color: var(--muted); }
+    .about-copy strong { color: var(--text); }
+    .interest-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px; }
+    .interest {
+      min-height: 124px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(145deg, var(--accent-soft), transparent 65%);
+    }
+    .interest-icon { font-size: 1.35rem; }
+    .interest h3 { margin: 15px 0 5px; font-size: 1rem; }
+    .interest p { margin: 0; color: var(--muted); font-size: .85rem; line-height: 1.5; }
+
+    .research-explorer {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      overflow: hidden;
+      min-height: 610px;
+    }
+    .project-tabs {
+      padding: 22px;
+      border-right: 1px solid var(--line);
+      background: rgba(5, 13, 25, .18);
+    }
+    .project-tabs h3 { margin-bottom: 17px; font-size: .88rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+    .project-tab {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 9px;
+      padding: 13px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      background: transparent;
+      color: var(--muted);
+      text-align: left;
+      cursor: pointer;
+      transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+    .project-tab:hover { color: var(--text); transform: translateX(2px); }
+    .project-tab.active { color: var(--text); border-color: var(--line-strong); background: var(--accent-soft); }
+    .project-tab-index { color: var(--accent); font-size: .78rem; font-weight: 850; }
+    .project-tab strong { display: block; font-size: .9rem; }
+    .project-tab small { display: block; margin-top: 2px; color: var(--muted); font-size: .72rem; }
+    .project-display { min-width: 0; display: grid; grid-template-rows: minmax(340px, 1fr) auto; }
+    .project-visual {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(103, 232, 249, .025), transparent),
+        radial-gradient(circle at 50% 45%, rgba(167, 139, 250, .08), transparent 42%);
+    }
+    .project-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .25;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle, black, transparent 76%);
+    }
+    .project-info {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      padding: 27px 30px 30px;
+      border-top: 1px solid var(--line);
+    }
+    .project-kicker { margin-bottom: 7px; color: var(--accent); font-size: .78rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .project-title { margin-bottom: 10px; font-size: clamp(1.45rem, 2.5vw, 2.15rem); }
+    .project-description { max-width: 780px; margin-bottom: 16px; color: var(--muted); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+    }
+    .project-links { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-width: 150px; }
+    .project-links .button { min-height: 40px; font-size: .82rem; }
+
+    .pipeline {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 840px);
+      display: grid;
+      align-items: center;
+      gap: 14px;
+    }
+    .pipe-node {
+      position: relative;
+      min-height: 74px;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      background: rgba(13, 27, 46, .88);
+      color: var(--text);
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 750;
+      box-shadow: 0 13px 34px rgba(0, 0, 0, .18);
+    }
+    html[data-theme="light"] .pipe-node { background: rgba(255,255,255,.93); }
+    .pipe-node.accent { border-color: rgba(103, 232, 249, .48); box-shadow: 0 13px 34px rgba(103,232,249,.08); }
+    .pipe-node.purple { border-color: rgba(167, 139, 250, .48); }
+    .pipe-node.green { border-color: rgba(52, 211, 153, .48); }
+    .pipe-node small { display: block; margin-top: 5px; color: var(--muted); font-weight: 550; }
+    .pipe-arrow { position: relative; height: 1px; background: var(--line-strong); }
+    .pipe-arrow::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid var(--accent);
+      border-right: 1px solid var(--accent);
+      transform: rotate(45deg);
+    }
+    .data-pulse {
+      position: absolute;
+      top: -3px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px var(--accent);
+      animation: pipePulse 2.4s linear infinite;
+    }
+    @keyframes pipePulse { from { left: 0; } to { left: calc(100% - 5px); } }
+    .pipeline.cmssa { grid-template-columns: 1fr 40px 1fr 40px 1.15fr; }
+    .branch-stack { display: grid; gap: 10px; }
+    .pipeline.micm { grid-template-columns: .8fr 34px 1.08fr 34px 1.05fr 34px .8fr; }
+    .modality-stack { display: grid; gap: 8px; }
+    .pipeline.uiqa { grid-template-columns: .8fr 34px 1.2fr 34px 1fr; }
+    .degradation-chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
+    .degradation-chips span {
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: .68rem;
+      text-align: center;
+    }
+    .pipeline.fire { grid-template-columns: .8fr 34px .85fr 34px .85fr 34px 1fr; }
+    .frame-strip { display: flex; gap: 4px; }
+    .frame-strip i {
+      flex: 1;
+      height: 43px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, transparent 34%, rgba(103,232,249,.18) 35% 65%, transparent 66%),
+        var(--panel-alt);
+    }
+
+    .work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+    .work-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--panel);
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .work-card:hover { transform: translateY(-5px); border-color: var(--line-strong); }
+    .work-image-button {
+      width: 100%;
+      display: block;
+      padding: 0;
+      border: 0;
+      background: var(--panel-alt);
+      cursor: zoom-in;
+    }
+    .work-image { width: 100%; aspect-ratio: 16 / 8.7; object-fit: cover; object-position: center top; transition: transform .5s ease; }
+    .work-card:hover .work-image { transform: scale(1.025); }
+    .work-body { padding: 22px; }
+    .work-meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: var(--muted); font-size: .76rem; }
+    .work-body h3 { margin-bottom: 10px; font-size: 1.16rem; }
+    .work-body p { margin-bottom: 17px; color: var(--muted); font-size: .9rem; }
+    .text-link { color: var(--accent); font-weight: 750; text-decoration: none; }
+    .text-link:hover { text-decoration: underline; }
+
+    .publication-list { display: grid; gap: 14px; }
+    .publication {
+      display: grid;
+      grid-template-columns: 100px minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: start;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+    .pub-venue {
+      padding: 9px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      color: var(--accent);
+      text-align: center;
+      font-size: .76rem;
+      font-weight: 850;
+      line-height: 1.3;
+    }
+    .publication h3 { margin-bottom: 7px; font-size: 1.05rem; }
+    .pub-authors { margin-bottom: 8px; color: var(--muted); font-size: .84rem; }
+    .publication p { margin-bottom: 0; color: var(--muted); font-size: .86rem; }
+    .pub-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+    .mini-link {
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 750;
+      text-decoration: none;
+    }
+    .mini-link:hover { color: var(--text); border-color: var(--accent); }
+
+    .timeline {
+      position: relative;
+      max-width: 920px;
+      margin-inline: auto;
+      padding-left: 42px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 6px;
+      bottom: 10px;
+      width: 1px;
+      background: linear-gradient(var(--accent), var(--line));
+    }
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 115px 1fr;
+      gap: 18px;
+      margin-bottom: 26px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: 30px;
+      width: 13px;
+      height: 13px;
+      border: 3px solid var(--bg);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .timeline-date { color: var(--accent); font-size: .8rem; font-weight: 850; }
+    .timeline-item h3 { margin-bottom: 5px; font-size: 1.04rem; }
+    .timeline-item p { margin-bottom: 0; color: var(--muted); font-size: .88rem; }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 24px;
+      padding: 40px;
+      background:
+        radial-gradient(circle at 90% 0%, rgba(167,139,250,.14), transparent 24rem),
+        radial-gradient(circle at 0% 100%, rgba(103,232,249,.12), transparent 28rem),
+        var(--panel);
+    }
+    .contact-panel h2 { margin-bottom: 17px; }
+    .contact-panel p { max-width: 700px; color: var(--muted); }
+    .contact-details { display: grid; gap: 10px; align-content: center; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(7, 16, 30, .18);
+      text-decoration: none;
+      font-size: .86rem;
+    }
+    html[data-theme="light"] .contact-link { background: rgba(255,255,255,.4); }
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(circle at 8% 4%, rgba(4, 125, 152, .10), transparent 30rem),
+        radial-gradient(circle at 92% 16%, rgba(114, 86, 201, .09), transparent 34rem),
+        linear-gradient(180deg, #edf2f7 0%, #e7edf4 52%, #eef3f8 100%);
+    }
+    html[data-theme="light"] #network-bg { opacity: .30; }
+    html[data-theme="light"] .site-header {
+      background: rgba(239, 244, 250, .88);
+      box-shadow: 0 8px 24px rgba(34, 57, 88, .06);
+    }
+    html[data-theme="light"] .site-header.scrolled {
+      border-color: rgba(38, 66, 100, .20);
+      box-shadow: 0 10px 30px rgba(34, 57, 88, .10);
+    }
+    html[data-theme="light"] .icon-button,
+    html[data-theme="light"] .lang-button,
+    html[data-theme="light"] .menu-button,
+    html[data-theme="light"] .button {
+      background: #ffffff;
+      border-color: rgba(38, 66, 100, .25);
+      box-shadow: 0 4px 12px rgba(34, 57, 88, .08);
+    }
+    html[data-theme="light"] .button:hover,
+    html[data-theme="light"] .icon-button:hover,
+    html[data-theme="light"] .lang-button:hover,
+    html[data-theme="light"] .menu-button:hover {
+      border-color: rgba(4, 125, 152, .58);
+      box-shadow: 0 8px 20px rgba(34, 57, 88, .12);
+    }
+    html[data-theme="light"] .button.primary {
+      background: linear-gradient(135deg, #0b88a3 0%, #08738d 100%);
+      color: #ffffff;
+      border-color: rgba(4, 103, 127, .72);
+      box-shadow: 0 8px 20px rgba(4, 125, 152, .22);
+    }
+    html[data-theme="light"] .button.primary:hover {
+      background: linear-gradient(135deg, #08738d 0%, #065f75 100%);
+      color: #ffffff;
+      border-color: rgba(4, 103, 127, .90);
+      box-shadow: 0 12px 26px rgba(4, 125, 152, .28);
+    }
+    html[data-theme="light"] .status-pill {
+      background: rgba(8, 127, 91, .09);
+      border-color: rgba(8, 127, 91, .30);
+    }
+    html[data-theme="light"] .orbit-card {
+      border-color: rgba(38, 66, 100, .26);
+      background:
+        radial-gradient(circle at center, rgba(4, 125, 152, .10), rgba(255,255,255,.82) 43%, transparent 44%),
+        repeating-radial-gradient(circle at center, transparent 0 72px, rgba(38,66,100,.20) 73px 74px, transparent 75px 118px),
+        rgba(248, 251, 255, .90);
+      box-shadow: inset 0 0 80px rgba(4, 125, 152, .06), 0 22px 55px rgba(34, 57, 88, .16);
+    }
+    html[data-theme="light"] .orbit-core {
+      border-color: rgba(4, 125, 152, .48);
+      background: radial-gradient(circle, rgba(4, 125, 152, .16), #ffffff 70%);
+      box-shadow: 0 16px 36px rgba(34, 57, 88, .16), 0 0 0 7px rgba(4,125,152,.04);
+    }
+    html[data-theme="light"] .orbit-node {
+      border-color: rgba(38, 66, 100, .30);
+      background: #ffffff;
+      box-shadow: 0 10px 24px rgba(34, 57, 88, .14);
+    }
+    html[data-theme="light"] .orbit-svg line { stroke: rgba(38, 66, 100, .28); }
+    html[data-theme="light"] .metric,
+    html[data-theme="light"] .glass,
+    html[data-theme="light"] .work-card,
+    html[data-theme="light"] .publication,
+    html[data-theme="light"] .timeline-item {
+      background: rgba(255, 255, 255, .94);
+      border-color: rgba(38, 66, 100, .22);
+      box-shadow: 0 14px 34px rgba(34, 57, 88, .11), 0 2px 8px rgba(34, 57, 88, .06);
+    }
+    html[data-theme="light"] .metric:hover,
+    html[data-theme="light"] .work-card:hover,
+    html[data-theme="light"] .publication:hover,
+    html[data-theme="light"] .timeline-item:hover {
+      border-color: rgba(4, 125, 152, .42);
+      box-shadow: 0 18px 42px rgba(34, 57, 88, .15);
+    }
+    html[data-theme="light"] .interest {
+      border-color: rgba(38, 66, 100, .20);
+      background: linear-gradient(145deg, rgba(4,125,152,.10), rgba(255,255,255,.84) 66%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+    }
+    html[data-theme="light"] .research-explorer {
+      background: #ffffff;
+      border-color: rgba(38, 66, 100, .25);
+    }
+    html[data-theme="light"] .project-tabs {
+      background: #eaf0f7;
+      border-right-color: rgba(38, 66, 100, .22);
+    }
+    html[data-theme="light"] .project-tab {
+      border-color: rgba(38,66,100,.08);
+    }
+    html[data-theme="light"] .project-tab:hover {
+      background: rgba(255,255,255,.70);
+      border-color: rgba(38,66,100,.18);
+    }
+    html[data-theme="light"] .project-tab.active {
+      background: #ffffff;
+      border-color: rgba(4, 125, 152, .36);
+      box-shadow: 0 8px 20px rgba(34, 57, 88, .10);
+    }
+    html[data-theme="light"] .project-visual {
+      background:
+        linear-gradient(180deg, rgba(4, 125, 152, .045), transparent),
+        radial-gradient(circle at 50% 45%, rgba(114, 86, 201, .09), transparent 44%),
+        #f4f7fb;
+    }
+    html[data-theme="light"] .project-visual::before { opacity: .46; }
+    html[data-theme="light"] .project-info { border-top-color: rgba(38, 66, 100, .20); }
+    html[data-theme="light"] .tag,
+    html[data-theme="light"] .degradation-chips span,
+    html[data-theme="light"] .mini-link,
+    html[data-theme="light"] .pub-venue {
+      background: #f7f9fc;
+      border-color: rgba(38, 66, 100, .22);
+    }
+    html[data-theme="light"] .pipe-node {
+      background: #ffffff;
+      border-color: rgba(38, 66, 100, .28);
+      box-shadow: 0 10px 24px rgba(34, 57, 88, .12);
+    }
+    html[data-theme="light"] .pipe-node.accent { border-color: rgba(4,125,152,.48); }
+    html[data-theme="light"] .pipe-node.purple { border-color: rgba(114,86,201,.46); }
+    html[data-theme="light"] .pipe-node.green { border-color: rgba(8,127,91,.44); }
+    html[data-theme="light"] .pipe-arrow { background: rgba(38,66,100,.30); }
+    html[data-theme="light"] .work-image-button {
+      background: #e8eef5;
+      border-bottom: 1px solid rgba(38, 66, 100, .18);
+    }
+    html[data-theme="light"] .publication,
+    html[data-theme="light"] .timeline-item { transition: border-color .2s ease, box-shadow .2s ease; }
+    html[data-theme="light"] .timeline-item::before { border-color: #e7edf4; }
+    html[data-theme="light"] .contact-panel {
+      background:
+        radial-gradient(circle at 90% 0%, rgba(114,86,201,.12), transparent 25rem),
+        radial-gradient(circle at 0% 100%, rgba(4,125,152,.10), transparent 28rem),
+        rgba(255,255,255,.96);
+    }
+    html[data-theme="light"] .contact-link {
+      background: #f6f8fb;
+      border-color: rgba(38, 66, 100, .22);
+      box-shadow: 0 4px 12px rgba(34, 57, 88, .06);
+    }
+    html[data-theme="light"] .contact-link:hover {
+      background: #ffffff;
+      border-color: rgba(4,125,152,.42);
+    }
+    html[data-theme="light"] .lock-panel {
+      border-color: rgba(38, 66, 100, .25);
+      background: linear-gradient(180deg, #ffffff, #f3f6fa);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.82), 0 16px 38px rgba(34,57,88,.13);
+    }
+    html[data-theme="light"] .lock-icon {
+      background: rgba(4,125,152,.09);
+      border-color: rgba(4,125,152,.28);
+    }
+    html[data-theme="light"] .private-badges span {
+      background: #ffffff;
+      border-color: rgba(38,66,100,.22);
+    }
+    html[data-theme="light"] .modal-content {
+      border-color: rgba(38,66,100,.25);
+      box-shadow: 0 28px 80px rgba(20,36,58,.22);
+    }
+    .contact-link span:last-child { color: var(--accent); }
+
+    footer { padding: 44px 0 35px; color: var(--muted); font-size: .8rem; text-align: center; }
+
+    .reveal { opacity: 1; transform: none; transition: opacity .65s ease, transform .65s ease; }
+    .motion-ready .reveal { opacity: 0; transform: translateY(24px); }
+    .motion-ready .reveal.visible { opacity: 1; transform: none; }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(2, 7, 14, .82);
+      backdrop-filter: blur(12px);
+    }
+    .modal.open { display: grid; }
+    .modal-content {
+      position: relative;
+      width: min(1120px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+      background: var(--panel-solid);
+      box-shadow: var(--shadow);
+    }
+    .modal img { width: 100%; height: auto; }
+    .modal-caption { padding: 15px 19px; color: var(--muted); font-size: .84rem; }
+    .modal-close {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      background: rgba(2, 7, 14, .74);
+      color: white;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; position: absolute; left: 20px; right: 20px; top: 68px; flex-direction: column; align-items: stretch; padding: 13px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel-solid); box-shadow: var(--shadow); }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 11px; }
+      .menu-button { display: inline-grid; place-items: center; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-copy { order: 1; }
+      .research-orbit { order: 2; min-height: 460px; }
+      .section-heading, .about-grid, .contact-panel { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .research-explorer { grid-template-columns: 1fr; }
+      .project-tabs { display: flex; gap: 8px; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      .project-tabs h3 { display: none; }
+      .project-tab { flex: 0 0 190px; margin: 0; }
+      .work-grid { grid-template-columns: 1fr; }
+      .publication { grid-template-columns: 86px 1fr; }
+      .pub-actions { grid-column: 2; justify-content: flex-start; }
+    }
+
+    @media (max-width: 700px) {
+      .shell { width: min(100% - 26px, var(--max)); }
+      .section { padding-top: 72px; }
+      .nav-wrap { min-height: 66px; }
+      .brand-name { display: none; }
+      .hero { padding-top: 46px; }
+      h1 { font-size: clamp(2.75rem, 16vw, 4.45rem); }
+      .hero-actions .button { width: 100%; }
+      .research-orbit { min-height: 360px; }
+      .orbit-card { width: min(100%, 355px); }
+      .orbit-core { width: 118px; height: 118px; font-size: .83rem; }
+      .orbit-node { min-width: 78px; padding: 8px; font-size: .64rem; }
+      .metric-grid { grid-template-columns: 1fr 1fr; }
+      .metric { padding: 16px; }
+      .interest-grid { grid-template-columns: 1fr; }
+      .about-copy { padding: 25px; }
+      .project-visual { min-height: 380px; padding: 20px 13px; }
+      .project-info { grid-template-columns: 1fr; padding: 22px; }
+      .project-links { flex-direction: row; flex-wrap: wrap; }
+      .pipeline.cmssa, .pipeline.micm, .pipeline.uiqa, .pipeline.fire { grid-template-columns: 1fr; width: min(100%, 360px); }
+      .pipe-arrow { width: 1px; height: 28px; margin-inline: auto; }
+      .pipe-arrow::after { right: -4px; top: auto; bottom: 0; transform: rotate(135deg); }
+      .data-pulse { left: -3px; top: 0; animation: pipePulseY 2s linear infinite; }
+      @keyframes pipePulseY { from { top: 0; } to { top: calc(100% - 5px); } }
+      .publication { grid-template-columns: 1fr; gap: 12px; }
+      .pub-venue { width: fit-content; }
+      .pub-actions { grid-column: auto; }
+      .timeline { padding-left: 30px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; padding: 18px; }
+      .timeline-item::before { left: -30px; }
+      .contact-panel { padding: 27px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      #network-bg { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to content" data-zh="跳到正文">Skip to content</a>
+  <canvas id="network-bg" aria-hidden="true"></canvas>
+
+  <header class="site-header" id="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="#home" aria-label="Yuqing Luo home">
+        <span class="brand-mark">YL</span>
+        <span class="brand-name">Yuqing Luo · 罗予清</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Primary navigation">
+        <a href="#about" data-en="About" data-zh="关于我">About</a>
+        <a href="#research" data-en="Research" data-zh="研究">Research</a>
+        <a href="#publications" data-en="Publications" data-zh="论文">Publications</a>
+        <a href="#journey" data-en="Journey" data-zh="经历">Journey</a>
+        <a href="#contact" data-en="Contact" data-zh="联系">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="lang-button" id="lang-toggle" type="button" aria-label="Switch language">中文</button>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Toggle color theme">☼</button>
+        <button class="menu-button" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <div class="status-pill"><span class="status-dot"></span><span data-en="Open to funded PhD opportunities for 2027" data-zh="开放寻找 2027 年全奖博士机会">Open to funded PhD opportunities for 2027</span></div>
+          <div class="eyebrow" data-en="Multimodal computer vision researcher" data-zh="多模态计算机视觉研究者">Multimodal computer vision researcher</div>
+          <h1><span data-en="I study how visual AI can" data-zh="我关注视觉 AI 如何做到">I study how visual AI can</span> <span class="accent-text" data-en="understand, evaluate, and remain reliable." data-zh="理解、评价，并保持可靠。">understand, evaluate, and remain reliable.</span></h1>
+          <p class="lead" data-en="My work connects vision-language learning, visual content evaluation, image complexity, degradation modelling, and robust perception. I am particularly interested in what visual and semantic evidence models use - and when those decisions fail." data-zh="我的研究连接视觉语言学习、视觉内容评价、图像复杂度、退化建模与鲁棒感知。我尤其关心模型依据哪些视觉与语义证据作出判断，以及这些判断会在何时失效。">My work connects vision-language learning, visual content evaluation, image complexity, degradation modelling, and robust perception. I am particularly interested in what visual and semantic evidence models use - and when those decisions fail.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#research"><span data-en="Explore research" data-zh="查看研究">Explore research</span> ↓</a>
+            <a class="button" href="assets/Yuqing_Luo_CV.pdf" target="_blank" rel="noopener"><span data-en="Download CV" data-zh="下载简历">Download CV</span> ↗</a>
+            <a class="button" href="mailto:xqtheone@gmail.com"><span data-en="Email me" data-zh="邮件联系">Email me</span> ↗</a>
+          </div>
+          <div class="hero-meta">
+            <span>🎓 <span data-en="MSc Distinction, Cardiff University" data-zh="卡迪夫大学硕士，Distinction">MSc Distinction, Cardiff University</span></span>
+            <span>📍 <span data-en="Priority regions: China, Hong Kong, and the UK" data-zh="优先地区：中国内地、香港与英国">Priority regions: China, Hong Kong, and the UK</span></span>
+          </div>
+        </div>
+
+        <div class="research-orbit reveal" aria-label="Interactive map of research interests">
+          <div class="orbit-card">
+            <svg class="orbit-svg" viewBox="0 0 500 500" aria-hidden="true">
+              <line x1="250" y1="250" x2="78" y2="112" />
+              <line x1="250" y1="250" x2="422" y2="138" />
+              <line x1="250" y1="250" x2="70" y2="376" />
+              <line x1="250" y1="250" x2="420" y2="380" />
+              <line x1="250" y1="250" x2="250" y2="46" />
+              <line x1="250" y1="250" x2="250" y2="458" />
+              <circle class="orbit-dot" cx="0" cy="0" r="4" />
+            </svg>
+            <div class="orbit-core"><span data-en="Reliable Multimodal Vision" data-zh="可靠的多模态视觉">Reliable Multimodal Vision</span><small data-en="human-centred + robust" data-zh="以人为本 + 鲁棒">human-centred + robust</small></div>
+            <div class="orbit-node orbit-vlm" data-en="Vision-Language" data-zh="视觉语言学习">Vision-Language</div>
+            <div class="orbit-node orbit-aigc" data-en="AIGC Analysis" data-zh="AIGC 分析">AIGC Analysis</div>
+            <div class="orbit-node orbit-quality" data-en="Visual Quality" data-zh="视觉质量">Visual Quality</div>
+            <div class="orbit-node orbit-robust" data-en="Robustness" data-zh="鲁棒性">Robustness</div>
+            <div class="orbit-node orbit-scene" data-en="Scene Semantics" data-zh="场景语义">Scene Semantics</div>
+            <div class="orbit-node orbit-complex" data-en="Complex Perception" data-zh="复杂感知">Complex Perception</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shell metric-grid reveal" aria-label="Research summary">
+        <div class="metric"><span class="metric-value" data-count="2">0</span><span class="metric-label" data-en="peer-reviewed publications" data-zh="篇同行评审论文">peer-reviewed publications</span></div>
+        <div class="metric"><span class="metric-value" data-count="1">0</span><span class="metric-label" data-en="first-author BMVC paper" data-zh="篇 BMVC 第一作者论文">first-author BMVC paper</span></div>
+        <div class="metric"><span class="metric-value" data-count="4">0</span><span class="metric-label" data-en="major vision projects" data-zh="项主要视觉研究项目">major vision projects</span></div>
+        <div class="metric"><span class="metric-value" data-count="2">0</span><span class="metric-label" data-en="UK degrees with honours" data-zh="个英国荣誉学位">UK degrees with honours</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-en="About" data-zh="关于我">About</div>
+            <h2 data-en="From visual scoring to reliable multimodal understanding." data-zh="从视觉评分，走向可靠的多模态理解。">From visual scoring to reliable multimodal understanding.</h2>
+          </div>
+          <p class="lead" data-en="I approach visual assessment as a reasoning problem: what evidence is present, how modalities complement one another, and how a model behaves when labels, image quality, or data distributions change." data-zh="我将视觉评价视为一个推理问题：图像中有哪些证据，不同模态如何互补，以及当标注、图像质量或数据分布发生变化时模型会如何表现。">I approach visual assessment as a reasoning problem: what evidence is present, how modalities complement one another, and how a model behaves when labels, image quality, or data distributions change.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-copy glass reveal">
+            <p data-en="I earned an MSc in Computing and IT Management with Distinction from Cardiff University in 2024, supervised by Dr Wei Zhou, and a BSc (Hons) in Computing with First Class Honours from the University of Greenwich in 2023." data-zh="我于 2024 年以 Distinction 获得卡迪夫大学 Computing and IT Management 硕士学位，硕士导师为 Dr Wei Zhou；并于 2023 年以 First Class Honours 获得格林威治大学 Computing 荣誉学士学位。">I earned an MSc in Computing and IT Management with Distinction from Cardiff University in 2024, supervised by Dr Wei Zhou, and a BSc (Hons) in Computing with First Class Honours from the University of Greenwich in 2023.</p>
+            <p data-en="My first-author BMVC 2025 work introduced cross-modal scene semantic alignment for image complexity assessment. I later contributed to a Displays paper that uses image-to-text and image-to-video generation to reveal implicit motion in static imagery." data-zh="我的 BMVC 2025 第一作者工作提出了面向图像复杂度评价的跨模态场景语义对齐方法。随后，我参与的 Displays 论文利用图生文与图生视频模型挖掘静态图像中的隐式运动信息。">My first-author BMVC 2025 work introduced cross-modal scene semantic alignment for image complexity assessment. I later contributed to a Displays paper that uses image-to-text and image-to-video generation to reveal implicit motion in static imagery.</p>
+            <p data-en="My current project studies degradation-aware vision-language quality assessment, with emphasis on limited labels, difficult samples, generalisation, and stable evaluation. I am now seeking a funded 2027 PhD where this foundation can grow into AIGC analysis, multimodal reasoning, and robust visual perception." data-zh="我目前正在研究退化感知的视觉语言质量评价，重点关注有限标注、困难样本、泛化与稳定评价。我正在寻找 2027 年全奖博士机会，希望将现有基础进一步拓展至 AIGC 分析、多模态推理与鲁棒视觉感知。">My current project studies degradation-aware vision-language quality assessment, with emphasis on limited labels, difficult samples, generalisation, and stable evaluation. I am now seeking a funded 2027 PhD where this foundation can grow into AIGC analysis, multimodal reasoning, and robust visual perception.</p>
+          </article>
+
+          <div class="interest-grid glass reveal">
+            <article class="interest"><span class="interest-icon">◉</span><h3 data-en="Vision-Language Learning" data-zh="视觉语言学习">Vision-Language Learning</h3><p data-en="Cross-modal alignment, semantic supervision, and multimodal representations." data-zh="跨模态对齐、语义监督与多模态表征。">Cross-modal alignment, semantic supervision, and multimodal representations.</p></article>
+            <article class="interest"><span class="interest-icon">◇</span><h3 data-en="Visual Evaluation" data-zh="视觉评价">Visual Evaluation</h3><p data-en="Image complexity, perceptual quality, and human-centred assessment." data-zh="图像复杂度、感知质量与以人为本的评价。">Image complexity, perceptual quality, and human-centred assessment.</p></article>
+            <article class="interest"><span class="interest-icon">△</span><h3 data-en="Robust Perception" data-zh="鲁棒感知">Robust Perception</h3><p data-en="Difficult conditions, sparse labels, domain shifts, and failure analysis." data-zh="困难条件、稀缺标注、域变化与失效分析。">Difficult conditions, sparse labels, domain shifts, and failure analysis.</p></article>
+            <article class="interest"><span class="interest-icon">✦</span><h3 data-en="AIGC & Multimodal AI" data-zh="AIGC 与多模态 AI">AIGC & Multimodal AI</h3><p data-en="Generated-content analysis, visual reasoning, and reliable model evaluation." data-zh="生成内容分析、视觉推理与可靠模型评价。">Generated-content analysis, visual reasoning, and reliable model evaluation.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-en="Research explorer" data-zh="研究可视化">Research explorer</div>
+            <h2 data-en="Four projects, one evolving research question." data-zh="四个项目，一条持续演进的研究主线。">Four projects, one evolving research question.</h2>
+          </div>
+          <p class="lead" data-en="Select a project to explore a simplified, animated reconstruction of its methodology. The diagrams are re-designed from the ideas and figures in my papers rather than copied directly." data-zh="选择项目可查看其方法的简化动态重构。下方图示根据论文中的思想与图表进行重新设计，并非直接复制。">Select a project to explore a simplified, animated reconstruction of its methodology. The diagrams are re-designed from the ideas and figures in my papers rather than copied directly.</p>
+        </div>
+
+        <div class="research-explorer glass reveal">
+          <aside class="project-tabs" aria-label="Research projects">
+            <h3 data-en="Project list" data-zh="项目列表">Project list</h3>
+            <button class="project-tab active" type="button" data-project="cmssa"><span class="project-tab-index">01</span><span><strong>CM-SSA</strong><small>2024 - 2025</small></span></button>
+            <button class="project-tab" type="button" data-project="micm"><span class="project-tab-index">02</span><span><strong>MICM</strong><small>2025</small></span></button>
+            <button class="project-tab" type="button" data-project="uiqa"><span class="project-tab-index">03</span><span><strong>Degradation-aware VLQA</strong><small>2026 - present</small></span></button>
+            <button class="project-tab" type="button" data-project="fire"><span class="project-tab-index">04</span><span><strong>Fire-Prevention AI</strong><small>2022 - 2023</small></span></button>
+          </aside>
+          <div class="project-display">
+            <div class="project-visual" id="project-visual" aria-live="polite"></div>
+            <div class="project-info">
+              <div>
+                <div class="project-kicker" id="project-kicker"></div>
+                <h3 class="project-title" id="project-title"></h3>
+                <p class="project-description" id="project-description"></p>
+                <div class="tag-row" id="project-tags"></div>
+              </div>
+              <div class="project-links" id="project-links"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-grid">
+          <article class="work-card reveal">
+            <button class="work-image-button" type="button" data-lightbox="assets/cmssa_framework.webp" data-caption-en="Re-designed webpage crop of the CM-SSA framework from the BMVC 2025 paper." data-caption-zh="BMVC 2025 论文中 CM-SSA 框架图的网页展示裁图。"><img class="work-image" src="assets/cmssa_framework.webp" alt="CM-SSA vision-language framework" loading="lazy" /></button>
+            <div class="work-body">
+              <div class="work-meta"><span>BMVC 2025</span><span data-en="First author" data-zh="第一作者">First author</span></div>
+              <h3>Cross-Modal Scene Semantic Alignment</h3>
+              <p data-en="A dual-branch framework aligns scene-semantic descriptions with visual features while predicting human-rated image complexity." data-zh="双分支框架将场景语义描述与视觉特征对齐，同时预测人类主观图像复杂度。">A dual-branch framework aligns scene-semantic descriptions with visual features while predicting human-rated image complexity.</p>
+              <a class="text-link" href="assets/papers/CM-SSA_BMVC2025.pdf" target="_blank" rel="noopener" data-en="Read paper →" data-zh="阅读论文 →">Read paper →</a>
+            </div>
+          </article>
+
+          <article class="work-card reveal">
+            <button class="work-image-button" type="button" data-lightbox="assets/micm_framework.webp" data-caption-en="Webpage crop of the tri-modal MICM framework from Displays 2025." data-caption-zh="Displays 2025 论文中三模态 MICM 框架图的网页展示裁图。"><img class="work-image" src="assets/micm_framework.webp" alt="MICM image text video framework" loading="lazy" /></button>
+            <div class="work-body">
+              <div class="work-meta"><span>Displays 2025</span><span data-en="Co-author" data-zh="共同作者">Co-author</span></div>
+              <h3>Unlocking Implicit Motion for Evaluating Image Complexity</h3>
+              <p data-en="Image, text, and generated video are aligned to expose motion cues that are latent in a single static image." data-zh="将图像、文本与生成视频进行对齐，从单张静态图像中显式挖掘潜在运动线索。">Image, text, and generated video are aligned to expose motion cues that are latent in a single static image.</p>
+              <a class="text-link" href="https://doi.org/10.1016/j.displa.2025.103131" target="_blank" rel="noopener">DOI →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-en="Publications" data-zh="论文成果">Publications</div>
+            <h2 data-en="Selected research outputs." data-zh="代表性研究成果。">Selected research outputs.</h2>
+          </div>
+          <p class="lead" data-en="My publications centre on multimodal representations for perceptual visual assessment, moving from scene semantics to implicit motion." data-zh="我的论文围绕面向感知视觉评价的多模态表征展开，研究主线从场景语义进一步拓展到隐式运动。">My publications centre on multimodal representations for perceptual visual assessment, moving from scene semantics to implicit motion.</p>
+        </div>
+
+        <div class="publication-list">
+          <article class="publication reveal">
+            <div class="pub-venue">BMVC<br />2025</div>
+            <div>
+              <h3>Cross-Modal Scene Semantic Alignment for Image Complexity Assessment</h3>
+              <div class="pub-authors"><strong>Y. Luo</strong>, Y. Li, J. Liu, J. Fu, H. Amirpour, G. Yue, B. Zhao, P. Corcoran, H. Liu, W. Zhou</div>
+              <p data-en="First cross-modal scene-semantic alignment framework for image complexity assessment; evaluated on IC9600, VISC-C, and SAVOIAS." data-zh="面向图像复杂度评价的首个跨模态场景语义对齐框架，并在 IC9600、VISC-C 与 SAVOIAS 上验证。">First cross-modal scene-semantic alignment framework for image complexity assessment; evaluated on IC9600, VISC-C, and SAVOIAS.</p>
+            </div>
+            <div class="pub-actions">
+              <a class="mini-link" href="assets/papers/CM-SSA_BMVC2025.pdf" target="_blank" rel="noopener">PDF</a>
+              <a class="mini-link" href="https://github.com/XQ2K/First-Cross-Model-ICA" target="_blank" rel="noopener">Code</a>
+            </div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="pub-venue">Displays<br />2025</div>
+            <div>
+              <h3>Unlocking Implicit Motion for Evaluating Image Complexity</h3>
+              <div class="pub-authors">Y. Li, X. Yang, <strong>Y. Luo</strong>, H. Amirpour, H. Liu, W. Zhou</div>
+              <p data-en="A tri-modal image-text-video framework that explicitly mines motion cues from generated descriptions and short videos." data-zh="通过生成描述与短视频显式挖掘运动线索的图像-文本-视频三模态框架。">A tri-modal image-text-video framework that explicitly mines motion cues from generated descriptions and short videos.</p>
+            </div>
+            <div class="pub-actions">
+              <a class="mini-link" href="assets/papers/MICM_Displays2025.pdf" target="_blank" rel="noopener">PDF</a>
+              <a class="mini-link" href="https://doi.org/10.1016/j.displa.2025.103131" target="_blank" rel="noopener">DOI</a>
+            </div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="pub-venue">Ongoing<br />2026</div>
+            <div>
+              <h3>Degradation-Aware Vision-Language Quality Assessment</h3>
+              <div class="pub-authors"><strong>Y. Luo</strong>, et al.</div>
+              <p data-en="Abstract submitted; the full manuscript is being prepared for double-blind review. The project studies explicit degradation semantics, limited-label learning, robustness, and stable evaluation." data-zh="摘要已提交，完整稿件正在准备进入双盲评审。该项目研究显式退化语义、有限标注学习、鲁棒性与稳定评价。">Abstract submitted; the full manuscript is being prepared for double-blind review. The project studies explicit degradation semantics, limited-label learning, robustness, and stable evaluation.</p>
+            </div>
+            <div class="pub-actions"><span class="mini-link" data-en="In progress" data-zh="进行中">In progress</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-en="Academic journey" data-zh="学术经历">Academic journey</div>
+            <h2 data-en="A progression from applied vision systems to multimodal research." data-zh="从应用型视觉系统，逐步走向多模态研究。">A progression from applied vision systems to multimodal research.</h2>
+          </div>
+          <p class="lead" data-en="Each stage added a new layer: detection and tracking, perceptual assessment, cross-modal semantics, implicit dynamics, and robustness." data-zh="每一阶段都增加了一层新的研究能力：检测与跟踪、感知评价、跨模态语义、隐式动态与鲁棒性。">Each stage added a new layer: detection and tracking, perceptual assessment, cross-modal semantics, implicit dynamics, and robustness.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal"><div class="timeline-date">2026 - present</div><div><h3 data-en="Degradation-Aware Vision-Language Quality Assessment" data-zh="退化感知视觉语言质量评价">Degradation-Aware Vision-Language Quality Assessment</h3><p data-en="Current research on semantic degradation modelling, limited labels, difficult samples, and stable repeated evaluation." data-zh="当前研究聚焦语义退化建模、有限标注、困难样本与稳定重复评价。">Current research on semantic degradation modelling, limited labels, difficult samples, and stable repeated evaluation.</p></div></article>
+          <article class="timeline-item reveal"><div class="timeline-date">2025</div><div><h3 data-en="BMVC publication and motion-aware multimodal research" data-zh="BMVC 论文与运动感知多模态研究">BMVC publication and motion-aware multimodal research</h3><p data-en="Published first-author CM-SSA at BMVC 2025 and co-authored the MICM study in Displays." data-zh="在 BMVC 2025 发表第一作者 CM-SSA，并共同参与 Displays 的 MICM 研究。">Published first-author CM-SSA at BMVC 2025 and co-authored the MICM study in Displays.</p></div></article>
+          <article class="timeline-item reveal"><div class="timeline-date">2023 - 2024</div><div><h3>Cardiff University · MSc Computing and IT Management</h3><p data-en="Graduated with Distinction. MSc research supervised by Dr Wei Zhou, focusing on image complexity and cross-modal visual understanding." data-zh="以 Distinction 毕业。硕士研究由 Dr Wei Zhou 指导，聚焦图像复杂度与跨模态视觉理解。">Graduated with Distinction. MSc research supervised by Dr Wei Zhou, focusing on image complexity and cross-modal visual understanding.</p></div></article>
+          <article class="timeline-item reveal"><div class="timeline-date">2024</div><div><h3>IEEE ICIP 2024 · Conference Volunteer</h3><p data-en="Supported registration, parallel sessions, attendee enquiries, and audiovisual setup in Abu Dhabi." data-zh="在阿布扎比协助参会注册、分会场、现场咨询与音视频设备支持。">Supported registration, parallel sessions, attendee enquiries, and audiovisual setup in Abu Dhabi.</p></div></article>
+          <article class="timeline-item reveal"><div class="timeline-date">2019 - 2023</div><div><h3>University of Greenwich · BSc (Hons) Computing</h3><p data-en="Graduated with First Class Honours. Final-year project built a YOLOv5 and DeepSort indoor occupancy system for fire evacuation support." data-zh="以 First Class Honours 毕业。毕业设计使用 YOLOv5 与 DeepSort 构建面向火灾疏散的室内人数统计系统。">Graduated with First Class Honours. Final-year project built a YOLOv5 and DeepSort indoor occupancy system for fire evacuation support.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="shell">
+        <div class="contact-panel glass reveal">
+          <div>
+            <div class="eyebrow" data-en="Contact" data-zh="联系我">Contact</div>
+            <h2 data-en="Let us discuss a research fit." data-zh="期待与您讨论合适的研究机会。">Let us discuss a research fit.</h2>
+            <p data-en="I am open to funded PhD opportunities for 2027 in multimodal vision, vision-language learning, AIGC analysis, visual model reliability, robust perception, and closely related areas. I prioritise China, Hong Kong, and the UK, while remaining open to exceptional opportunities elsewhere." data-zh="我正在寻找 2027 年全奖博士机会，方向包括多模态视觉、视觉语言学习、AIGC 分析、视觉模型可靠性、鲁棒感知及其相关领域。我优先考虑中国内地、香港与英国，也愿意认真考虑其他地区高度匹配的机会。">I am open to funded PhD opportunities for 2027 in multimodal vision, vision-language learning, AIGC analysis, visual model reliability, robust perception, and closely related areas. I prioritise China, Hong Kong, and the UK, while remaining open to exceptional opportunities elsewhere.</p>
+          </div>
+          <div class="contact-details">
+            <a class="contact-link" href="mailto:xqtheone@gmail.com"><span>Email</span><span>xqtheone@gmail.com ↗</span></a>
+            <a class="contact-link" href="https://github.com/XQ2K" target="_blank" rel="noopener"><span>GitHub</span><span>@XQ2K ↗</span></a>
+            <a class="contact-link" href="assets/Yuqing_Luo_CV.pdf" target="_blank" rel="noopener"><span data-en="Curriculum vitae" data-zh="个人简历">Curriculum vitae</span><span>PDF ↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">© <span id="year"></span> Yuqing Luo · 罗予清 · <span data-en="Built as a dependency-free static site for GitHub Pages." data-zh="为 GitHub Pages 构建的零依赖静态网站。">Built as a dependency-free static site for GitHub Pages.</span></footer>
+
+  <div class="modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Research figure preview">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Close preview">×</button>
+      <img id="modal-image" alt="Research figure enlarged preview" />
+      <div class="modal-caption" id="modal-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    const projectData = {
+      cmssa: {
+        kicker: { en: "BMVC 2025 · First author", zh: "BMVC 2025 · 第一作者" },
+        title: { en: "Cross-Modal Scene Semantic Alignment", zh: "跨模态场景语义对齐" },
+        description: {
+          en: "CM-SSA uses a complexity-regression branch and a scene-semantic alignment branch to refine visual representations with textual scene descriptions. On IC9600, the published model reports SRCC 0.958 and PLCC 0.961.",
+          zh: "CM-SSA 通过复杂度回归分支与场景语义对齐分支，利用文本场景描述优化视觉表征。论文在 IC9600 上报告了 SRCC 0.958 与 PLCC 0.961。"
+        },
+        tags: ["Vision-Language", "CLIP", "Scene Semantics", "Image Complexity", "Human Perception"],
+        links: [
+          { label: { en: "Paper", zh: "论文" }, href: "assets/papers/CM-SSA_BMVC2025.pdf" },
+          { label: { en: "Code", zh: "代码" }, href: "https://github.com/XQ2K/First-Cross-Model-ICA" }
+        ],
+        visual: "cmssa"
+      },
+      micm: {
+        kicker: { en: "Displays 2025 · Co-author", zh: "Displays 2025 · 共同作者" },
+        title: { en: "Motion-Inspired Image Complexity Metric", zh: "运动感知图像复杂度评价" },
+        description: {
+          en: "MICM turns one static image into three aligned modalities: the image itself, an image-to-text description, and an image-to-video sequence. Hierarchical text-video alignment makes latent motion explicitly available to complexity prediction.",
+          zh: "MICM 将单张静态图像扩展为三个对齐模态：原始图像、图生文描述与图生视频序列。分层文本-视频对齐使潜在运动信息能够显式参与复杂度预测。"
+        },
+        tags: ["Image-Text-Video", "Implicit Motion", "Video Generation", "Hierarchical Alignment", "Perceptual Evaluation"],
+        links: [
+          { label: { en: "Paper", zh: "论文" }, href: "assets/papers/MICM_Displays2025.pdf" },
+          { label: { en: "DOI", zh: "DOI" }, href: "https://doi.org/10.1016/j.displa.2025.103131" }
+        ],
+        visual: "micm"
+      },
+      uiqa: {
+        kicker: { en: "Ongoing research · 2026", zh: "进行中研究 · 2026" },
+        title: { en: "Degradation-Aware Vision-Language Quality Assessment", zh: "退化感知视觉语言质量评价" },
+        description: {
+          en: "This ongoing project studies degradation-aware vision-language quality assessment with emphasis on limited labels, robustness, stable repeated evaluation, and difficult-scene behaviour. For confidentiality reasons, the full technical diagram is not shown on this public page.",
+          zh: "该进行中项目聚焦退化感知视觉语言质量评价，重点关注少标注学习、鲁棒性、稳定重复评价与困难场景表现。出于保密考虑，本页面暂不公开完整技术结构图。"
+        },
+        tags: ["Visual Quality", "Degradation Semantics", "Limited Labels", "Robustness", "Generalisation"],
+        links: [
+          { label: { en: "Public summary", zh: "公开简介" }, href: "#publications" }
+        ],
+        visual: "uiqa"
+      },
+      fire: {
+        kicker: { en: "BSc final-year project · 2023", zh: "本科毕业设计 · 2023" },
+        title: { en: "Image Recognition to Aid Fire Evacuations", zh: "面向火灾疏散的视觉识别系统" },
+        description: {
+          en: "A practical indoor occupancy system built with YOLOv5 and DeepSort. It detects people, maintains identities across frames, counts movement through user-selected zones, and presents live information through a desktop interface.",
+          zh: "使用 YOLOv5 与 DeepSort 构建的室内人数统计系统，完成行人检测、跨帧身份跟踪、用户选区内的进出计数，并通过桌面界面实时展示信息。"
+        },
+        tags: ["YOLOv5", "DeepSort", "Object Tracking", "Occupancy Counting", "Applied Computer Vision"],
+        links: [
+          { label: { en: "Read dissertation", zh: "阅读论文" }, href: "assets/papers/Fire_Prevention_AI_FYP.pdf" }
+        ],
+        visual: "fire"
+      }
+    };
+
+    const visualTemplates = {
+      cmssa: () => `
+        <div class="pipeline cmssa" aria-label="CM-SSA simplified pipeline">
+          <div class="branch-stack">
+            <div class="pipe-node accent">Image<small>patch + class tokens</small></div>
+            <div class="pipe-node purple">Scene description<small>motion · culture · mood · position</small></div>
+          </div>
+          <div class="pipe-arrow"><span class="data-pulse"></span></div>
+          <div class="branch-stack">
+            <div class="pipe-node">Vision encoder<small>learnable visual prompts</small></div>
+            <div class="pipe-node">Text encoder<small>semantic prompt tokens</small></div>
+          </div>
+          <div class="pipe-arrow"><span class="data-pulse" style="animation-delay:-1.1s"></span></div>
+          <div class="branch-stack">
+            <div class="pipe-node green">Complexity regression<small>simple → high complexity</small></div>
+            <div class="pipe-node accent">Scene-semantic alignment<small>refined image representation</small></div>
+          </div>
+        </div>`,
+      micm: () => `
+        <div class="pipeline micm" aria-label="MICM simplified tri-modal pipeline">
+          <div class="pipe-node accent">Static image<small>visual content</small></div>
+          <div class="pipe-arrow"><span class="data-pulse"></span></div>
+          <div class="modality-stack">
+            <div class="pipe-node">Image branch</div>
+            <div class="pipe-node purple">Image-to-text</div>
+            <div class="pipe-node green">Image-to-video</div>
+          </div>
+          <div class="pipe-arrow"><span class="data-pulse" style="animation-delay:-.7s"></span></div>
+          <div class="modality-stack">
+            <div class="pipe-node">Image features</div>
+            <div class="pipe-node purple">Text features</div>
+            <div class="pipe-node green">Video features</div>
+          </div>
+          <div class="pipe-arrow"><span class="data-pulse" style="animation-delay:-1.4s"></span></div>
+          <div class="pipe-node accent">Hierarchical alignment<small>frame · word · global</small></div>
+        </div>`,
+      uiqa: () => `
+        <div class="pipeline locked" aria-label="Private ongoing project panel">
+          <div class="lock-panel">
+            <div class="lock-icon">🔒</div>
+            <h4>${currentLanguage === "zh" ? "暂未公开完整结构" : "Full structure temporarily private"}</h4>
+            <p>${currentLanguage === "zh" ? "该项目目前仍在推进中。为避免公开页面泄露尚未发布的技术细节，这里仅保留研究方向级别的说明，不展示完整方法结构图。" : "This project is still in progress. To avoid revealing unpublished technical details on a public webpage, only a high-level summary is shown here instead of the full methodology diagram."}</p>
+            <div class="private-badges">
+              <span>${currentLanguage === "zh" ? "进行中" : "in progress"}</span>
+              <span>${currentLanguage === "zh" ? "公开版已隐藏" : "public details hidden"}</span>
+              <span>${currentLanguage === "zh" ? "可后续更新" : "to be updated later"}</span>
+            </div>
+          </div>
+        </div>`,
+      fire: () => `
+        <div class="pipeline fire" aria-label="Fire prevention computer vision system pipeline">
+          <div class="pipe-node accent"><div class="frame-strip"><i></i><i></i><i></i></div><small>CCTV / video input</small></div>
+          <div class="pipe-arrow"><span class="data-pulse"></span></div>
+          <div class="pipe-node">YOLOv5<small>person detection</small></div>
+          <div class="pipe-arrow"><span class="data-pulse" style="animation-delay:-.7s"></span></div>
+          <div class="pipe-node purple">DeepSort<small>identity tracking</small></div>
+          <div class="pipe-arrow"><span class="data-pulse" style="animation-delay:-1.4s"></span></div>
+          <div class="pipe-node green">Zone counter + GUI<small>live occupancy for evacuation support</small></div>
+        </div>`
+    };
+
+    function storageGet(key) {
+      try { return localStorage.getItem(key); } catch (_) { return null; }
+    }
+    function storageSet(key, value) {
+      try { localStorage.setItem(key, value); } catch (_) {}
+    }
+
+    let currentLanguage = storageGet("portfolio-language") || "en";
+    let currentProject = "cmssa";
+
+    function textFor(value) {
+      if (typeof value === "string") return value;
+      return value[currentLanguage] || value.en;
+    }
+
+    function renderProject(key) {
+      currentProject = key;
+      const project = projectData[key];
+      document.querySelectorAll(".project-tab").forEach(tab => tab.classList.toggle("active", tab.dataset.project === key));
+      const visual = document.getElementById("project-visual");
+      visual.innerHTML = visualTemplates[project.visual]();
+      document.getElementById("project-kicker").textContent = textFor(project.kicker);
+      document.getElementById("project-title").textContent = textFor(project.title);
+      document.getElementById("project-description").textContent = textFor(project.description);
+      document.getElementById("project-tags").innerHTML = project.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
+      document.getElementById("project-links").innerHTML = project.links.map(link => `<a class="button" href="${link.href}" ${link.href.startsWith("http") || link.href.endsWith(".pdf") ? 'target="_blank" rel="noopener"' : ''}>${textFor(link.label)} ↗</a>`).join("");
+    }
+
+    function applyLanguage(lang) {
+      currentLanguage = lang;
+      storageSet("portfolio-language", lang);
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-en][data-zh]").forEach(el => { el.textContent = el.dataset[lang]; });
+      document.getElementById("lang-toggle").textContent = lang === "en" ? "中文" : "EN";
+      renderProject(currentProject);
+    }
+
+    document.querySelectorAll(".project-tab").forEach(tab => tab.addEventListener("click", () => renderProject(tab.dataset.project)));
+    document.getElementById("lang-toggle").addEventListener("click", () => applyLanguage(currentLanguage === "en" ? "zh" : "en"));
+
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const preferredTheme = storageGet("portfolio-theme") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    function applyTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      themeToggle.textContent = theme === "dark" ? "☼" : "☾";
+      themeMeta.setAttribute("content", theme === "dark" ? "#07101e" : "#e9eef5");
+    }
+    applyTheme(preferredTheme);
+    themeToggle.addEventListener("click", () => {
+      const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      applyTheme(next);
+      storageSet("portfolio-theme", next);
+    });
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }));
+
+    const header = document.getElementById("site-header");
+    addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 10), { passive: true });
+
+    document.documentElement.classList.add("motion-ready");
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.dataset.count);
+        const start = performance.now();
+        const duration = 800;
+        function frame(now) {
+          const p = Math.min(1, (now - start) / duration);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: .7 });
+    document.querySelectorAll("[data-count]").forEach(el => counterObserver.observe(el));
+
+    const sections = [...document.querySelectorAll("main section[id]")];
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navAnchors.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`));
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    sections.forEach(section => sectionObserver.observe(section));
+
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+    const modalCaption = document.getElementById("modal-caption");
+    function closeModal() { modal.classList.remove("open"); document.body.style.overflow = ""; }
+    document.querySelectorAll("[data-lightbox]").forEach(button => button.addEventListener("click", () => {
+      modalImage.src = button.dataset.lightbox;
+      modalCaption.textContent = button.dataset[currentLanguage === "zh" ? "captionZh" : "captionEn"];
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }));
+    document.getElementById("modal-close").addEventListener("click", closeModal);
+    modal.addEventListener("click", event => { if (event.target === modal) closeModal(); });
+    addEventListener("keydown", event => { if (event.key === "Escape") closeModal(); });
+
+    function initNetworkCanvas() {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const canvas = document.getElementById("network-bg");
+      const ctx = canvas.getContext("2d");
+      let width, height, dpr, points;
+      function reset() {
+        dpr = Math.min(devicePixelRatio || 1, 2);
+        width = innerWidth;
+        height = innerHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const count = Math.min(68, Math.max(28, Math.floor(width / 22)));
+        points = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - .5) * .22,
+          vy: (Math.random() - .5) * .22,
+          r: Math.random() * 1.4 + .6
+        }));
+      }
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        const style = getComputedStyle(document.documentElement);
+        const accent = style.getPropertyValue("--accent").trim();
+        ctx.fillStyle = accent;
+        ctx.strokeStyle = accent;
+        for (const p of points) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < -10 || p.x > width + 10) p.vx *= -1;
+          if (p.y < -10 || p.y > height + 10) p.vy *= -1;
+          ctx.globalAlpha = .32;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+        }
+        for (let i = 0; i < points.length; i++) {
+          for (let j = i + 1; j < points.length; j++) {
+            const a = points[i], b = points[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 118) {
+              ctx.globalAlpha = (1 - dist / 118) * .11;
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      reset(); draw();
+      addEventListener("resize", reset, { passive: true });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    applyLanguage(currentLanguage);
+    renderProject("cmssa");
+    initNetworkCanvas();
+  </script>
+</body>
+</html>
